@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "eroxtvKejEtSMuAhCATeNBoME9lSAdAhaN+rzXtdtss=",
+  "Source": "TEST_APP",
+  "BasePath": "_content/TEST_APP",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
