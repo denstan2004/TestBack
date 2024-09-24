@@ -20,5 +20,13 @@ namespace TEST_APP.Controllers
             UserRepository userRepository = new UserRepository();
             userRepository.UpdateUser(user);
         }
+        [HttpPost]
+        [Route("Delete/user")]
+        public void DeleteUser([FromBody] User user)
+        {
+            UserRepository userRepository = new UserRepository();
+            userRepository.DeleteUser(user);
+        }
+
     }
 }

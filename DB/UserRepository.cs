@@ -10,18 +10,15 @@ public class UserRepository
 {
     private readonly string _connectionString;
 
-    // Конструктор приймає рядок підключення
     public UserRepository()
     {
         _connectionString = "Server=DENNI-PC;Database=model;Trusted_Connection=True;";
     }
 
-    // Метод для отримання імен з таблиці Users
-    // Метод для отримання імен з таблиці Users
+
     public IEnumerable<User> GetUserNames()
     {
-        // Запит SQL для вибірки імен
-        string query = "SELECT Id,Name,DateOfBirth as BirthDay , Married,Phone,Salary  FROM [dbo].[Users]"; // Додано квадратні дужки
+        string query = "SELECT Id,Name,DateOfBirth as BirthDay , Married,Phone,Salary  FROM [dbo].[Users]"; 
 
         using (var connection = new SqlConnection(_connectionString))
         {
@@ -31,21 +28,16 @@ public class UserRepository
         }
 
     }
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public DateTime BirthDay { get; set; }
-    public bool Married { get; set; }
-    public string Phone { get; set; }
-    public decimal Salary { get; set; }
-    public void UpdateUser(User user)
-    {
-        string query = @"UPDATE [dbo].[Users]
-SET [Name] = @Name, 
-    [DateOfBirth] = @BirthDay, 
-    [Married] = @Married, 
-    [Phone] = @Phone, 
-    [Salary] = @Salary
-WHERE [Id] = @Id"; // Added SET keyword
+
+     public void UpdateUser(User user)
+    { 
+                    string query = @"UPDATE [dbo].[Users]
+            SET [Name] = @Name, 
+                [DateOfBirth] = @BirthDay, 
+                [Married] = @Married, 
+                [Phone] = @Phone, 
+                [Salary] = @Salary
+            WHERE [Id] = @Id";  
 
         using (var connection = new SqlConnection(_connectionString))
         {
@@ -53,6 +45,15 @@ WHERE [Id] = @Id"; // Added SET keyword
             var userNames = connection.Execute(query, new { user.Name, user.BirthDay, user.Married, user.Phone, user.Salary, user.Id });
         }
     }
+    public void DeleteUser(User user)
+    {
+        string query = @"DELETE FROM [dbo].[Users] WHERE [Id] = @Id";
 
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
+            var userNames = connection.Execute(query, new {  user.Id });
+        }
+    }
 
 }
